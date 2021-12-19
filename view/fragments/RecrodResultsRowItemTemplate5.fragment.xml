@@ -1,0 +1,199 @@
+<!--
+
+    Copyright (C) 2009-2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<!--
+    Record Results page charcteristic result table inspection result column template 5
+    Quantitative, Summarized, No measured values, No. Above / Below
+ -->
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout">
+    <l:Grid hSpacing="0" vSpacing="0.5" width="100%">
+        <l:content>
+            <!-- Single Values or Mean Value Grid -->
+            <l:Grid hSpacing="0" vSpacing="0"  visible="{= ${InspSampleValuationRule}!=='50' &amp;&amp; ${InspSampleValuationRule}!=='A1' &amp;&amp; ${InspSampleValuationRule}!=='10'}">
+                <l:layoutData>
+                    <l:GridData span="XL6 L6 M6 S12" />
+                </l:layoutData>
+                <l:content>
+                    <Label text="{
+                        parts: [
+                            {path: 'IsSum'},
+                            {path: 'IsQual'},
+                            {path: 'IsWithCode'},
+                            {path: 'IsMeasure'},
+                            {path: 'Unitofmeasuretechnicalname'}
+                        ],
+                        formatter: '.formatter.concatInspectResultsLabel'
+                    }">
+                        <layoutData>
+                            <l:GridData span="XL11 L11 M11 S12" />
+                        </layoutData>
+                    </Label>
+                    <Select forceSelection="false" enabled="{= ${IsEditable}}" change="onChangeForSummValuation" selectedKey="{Inspectionvaluationresult}" width="100%">
+                        <core:Item key="" text="" />
+                        <core:Item key="A" text="{i18n>QM_ACCEPTED}" />
+                        <core:Item key="R" text="{i18n>QM_REJECTED}" />
+                        <layoutData>
+                            <l:GridData span="XL11 L11 M11 S12" />
+                        </layoutData>
+                    </Select>
+                </l:content>
+            </l:Grid>
+            <!-- no Mean Value Grid -->
+            <!-- No. Above / Below -->
+            <l:Grid hSpacing="0" vSpacing="0">
+                <l:layoutData>
+                    <l:GridData span="XL3 L3 M3 S12" />
+                </l:layoutData>
+                <l:content>
+                    <Label text="{ path: 'i18n>QM_NO_ABOVE_BELOW', formatter: '.formatter.concatColon' }" tooltip="{i18n>QM_NO_ABOVE_BELOW}">
+                        <layoutData>
+                            <l:GridData span="XL11 L11 M11 S12" />
+                        </layoutData>
+                    </Label>
+                    <l:Grid hSpacing="0" vSpacing="0">
+                        <l:layoutData>
+                            <l:GridData span="XL11 L11 M11 S5" />
+                        </l:layoutData>
+                        <l:content>
+                            <Input editable="{= ${IsEditable}}" value="{InspRsltAboveToleranceValsNmbr}" placeholder="{i18n>QM_CHAR_STATISTICAL_INFORMATION_NO_ABOVE}" type="Number" enabled="{IsUpper}" class="sapUiSmallMarginEnd" change="onChangeForNoAbove">
+                            <layoutData>
+                                <l:GridData span="XL5 L5 M5 S5" linebreak="true" />
+                            </layoutData>
+                            </Input>
+                            <Input editable="{= ${IsEditable}}" value="{InspRsltBelowToleranceValsNmbr}" placeholder="{i18n>QM_CHAR_STATISTICAL_INFORMATION_NO_BELOW}" type="Number" enabled="{IsLower}" change="onChangeForNoBleow">
+                            <layoutData>
+                                <l:GridData span="XL5 L5 M5 S5" indent="XL1 L1 M1 S1" />
+                            </layoutData>
+                            </Input>
+                        </l:content>
+                    </l:Grid>
+                </l:content>
+            </l:Grid>
+            <!-- Inspected / Nonconforming -->
+            <l:Grid hSpacing="0" vSpacing="0">
+                <l:layoutData>
+                    <l:GridData span="XL3 L3 M3 S12" />
+                </l:layoutData>
+                <l:content>
+                    <Label text="{ path: 'i18n>QM_INSPECTED_NONCONFORMING', formatter: '.formatter.concatColon' }" tooltip="{i18n>QM_INSPECTED_NONCONFORMING}">
+                        <layoutData>
+                            <l:GridData span="XL11 L11 M11 S12" />
+                        </layoutData>
+                    </Label>
+                    <l:Grid hSpacing="0" vSpacing="0">
+                        <l:layoutData>
+                            <l:GridData span="XL11 L11 M11 S5" />
+                        </l:layoutData>
+                        <l:content>
+                            <Input editable="{= ${IsEditable}}" value="{InspResultValidValuesNumber}" placeholder="{i18n>QM_RR_CHAR_LIST_INSPECTED}" type="Number" change="onChangeForInspected" valueStateText="{ValuationErrorMessage}" valueState="{parts: [ {path: 'ValuationErrorMessage'}],formatter: '.formatter.inspectedStatus'}" enabled="true" class="sapUiSmallMarginEnd">
+                            <layoutData>
+                                <l:GridData span="XL5 L5 M5 S5" linebreak="true" />
+                            </layoutData>
+                            </Input>
+                            <Input editable="{= ${IsEditable}}" value="{InspRsltNonconformingValsNmbr}" change="onChangeForNonconforming" placeholder="{i18n>QM_CHAR_STATISTICAL_INFORMATION_NONCONFORMING}" type="Number" enabled="false">
+                            <layoutData>
+                                <l:GridData span="XL5 L5 M5 S5" indent="XL1 L1 M1 S1" />
+                            </layoutData>
+                            </Input>
+                        </l:content>
+                    </l:Grid>
+                </l:content>
+            </l:Grid>
+            <!-- Specification and Target -->
+            <l:Grid hSpacing="0" vSpacing="0">
+                <l:layoutData>
+                    <l:GridData span="XL6 L6 M6 S12" />
+                </l:layoutData>
+                <l:content>
+                    <ObjectAttribute visible="{= ${IsLower} || ${IsUpper} || !!${SelectedCodeSetText}}" title="{i18n>QM_CHAR_DETAIL_SPEC}" text="{
+                        parts: [
+                            {path: 'Inspspecisquantitative'},
+                            {path: 'Inspspeclowerlimit'},
+                            {path: 'Inspspecupperlimit'},
+                            {path: 'IsLower'},
+                            {path: 'IsUpper'},
+                            {path: 'Unitofmeasuretechnicalname'},
+                            {path: 'SelectedCodeSetText'},
+                            {path: 'Inspspecdecimalplaces'}
+                        ],
+                        formatter: '.formatter.charDetailsSpec'}">
+                        <layoutData>
+                            <l:GridData span="XL11 L11 M11 S12" />
+                        </layoutData>
+                    </ObjectAttribute>
+                    <ObjectAttribute visible="{HasTarget}" title="{i18n>QM_CHAR_RESULT_TARGET}" text="{
+                        parts: [
+                            {path: 'Inspspectargetvalue'},
+                            {path: 'Inspspecdecimalplaces'},
+                            {path: 'Unitofmeasuretechnicalname'}
+                        ],
+                        formatter: '.formatter.characDetailMeanValue'
+                    }">
+                        <layoutData>
+                            <l:GridData span="XL11 L11 M11 S12" />
+                        </layoutData>
+                    </ObjectAttribute>
+                </l:content>
+            </l:Grid>
+            <!-- Inspect -->
+            <l:Grid hSpacing="0" vSpacing="0">
+                <l:layoutData>
+                    <l:GridData span="XL6 L6 M6 S12" />
+                </l:layoutData>
+                <l:content>
+                    <ObjectAttribute title="{i18n>QM_CHAR_RESULT_INSPECT}" text="{
+                        parts: [
+                            {path: 'Inspcharacteristicsamplesize'},
+                            {path: 'Inspspecsamplequantityfactor'},
+                            {path: 'Inspcharacteristicsampleunit'}
+                        ],
+                        formatter: '.formatter.concatInspect'
+                    }">
+                        <layoutData>
+                            <l:GridData span="XL11 L11 M11 S12" />
+                        </layoutData>
+                    </ObjectAttribute>
+                </l:content>
+            </l:Grid>
+              <!-- Inspect -->
+            <l:Grid hSpacing="0" vSpacing="0">
+                <l:layoutData>
+                    <l:GridData span="XL6 L6 M6 S12" />
+                </l:layoutData>
+                <l:content>
+                    <ObjectAttribute title="Lot" text="{ZQALS_SAFT}">
+                        <layoutData>
+                            <l:GridData span="XL11 L11 M11 S12" />
+                        </layoutData>
+                    </ObjectAttribute>
+                </l:content>
+            </l:Grid>
+            <l:Grid hSpacing="0" vSpacing="0">
+                <l:layoutData>
+                    <l:GridData span="XL6 L6 M6 S12" />
+                </l:layoutData>
+                <l:content>
+                    <ObjectAttribute title="Rulo" text="{ZQALS_SAFT}">
+                        <layoutData>
+                            <l:GridData span="XL11 L11 M11 S12" />
+                        </layoutData>
+                    </ObjectAttribute>
+                </l:content>
+            </l:Grid>
+            <l:Grid hSpacing="0" vSpacing="0">
+                <l:layoutData>
+                    <l:GridData span="XL6 L6 M6 S12" />
+                </l:layoutData>
+                <l:content>
+                    <ObjectAttribute title="Saft" text="{ZQALS_SAFT}">
+                        <layoutData>
+                            <l:GridData span="XL11 L11 M11 S12" />
+                        </layoutData>
+                    </ObjectAttribute>
+                </l:content>
+            </l:Grid>
+        </l:content>
+    </l:Grid>
+</core:FragmentDefinition>

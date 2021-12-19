@@ -1,0 +1,71 @@
+<!--
+
+    Copyright (C) 2009-2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<!--This view provides characteristics view by one or more inspection lot
+	User can use filter selection to filter characteristics fields they want
+	to display. -->
+<mvc:View controllerName="i2d.qm.inspresults.records1.controller.RecordResults"
+	xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout"
+	xmlns:mchart="sap.suite.ui.commons" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m">
+	<Page showHeader="false">
+		<content>
+			<Table id="QR_RR_CHARAC_TABLE" noDataText="{i18n>QM_RR_NO_CHAR}" mode="SingleSelectMaster" class="sapUiContentPadding">
+				<headerToolbar>
+					<Toolbar height="4.2rem">
+						<SegmentedButton selectedKey="allData" id="QR_RR_STATUS_TAB" select="retrieveDataByFilters">
+							<items>
+								<SegmentedButtonItem text="{recordResultsModel>/allDataHeader}" key="allData" tooltip="{recordResultsModel>/allDataHeader}"/>
+								<SegmentedButtonItem text="{recordResultsModel>/openDataHeader}" key="openStatusData" tooltip="{recordResultsModel>/openDataHeader}"/>
+							</items>
+						</SegmentedButton>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<!-- Inspection Object Text -->
+					<Column demandPopin="true" id="QR_RR_CHARAC_TABLE_COLUMN_INSPOBJ" minScreenWidth="15rem" vAlign="Top" popinDisplay="WithoutHeader">
+						<Label text="{i18n>QM_INSPECTION_OBJECT}" />
+					</Column>
+					<!-- Inspection Characteristic Text -->
+					<Column demandPopin="true" id="QR_RR_CHARAC_TABLE_COLUMN_KEYATTR" vAlign="Top" minScreenWidth="Medium">
+						<Label text="{i18n>QM_PROPERTIES}" />
+					</Column>
+					<!-- Inspection Result Text -->
+					<Column demandPopin="true" id="QR_RR_CHARAC_TABLE_COLUMN_INSPRESULT" minScreenWidth="XLarge" width="38%" popinDisplay="Block">
+						<Label text="{i18n>QM_INSPECTION_RESULT}" />
+					</Column>
+
+					<!-- Status Text -->
+					<Column demandPopin="true" id="QR_RR_CHARAC_TABLE_COLUMN_STATUS" minScreenWidth="Medium" vAlign="Top" >
+						<customData>
+							<core:CustomData key="p13nData" value='\{"columnKey": "Status", "leadingProperty": "Inspectionlot"}'/>
+						</customData>
+						<Label text="{i18n>QM_INSPECTION_STATUS}" />
+					</Column>
+					<!-- Remark Text -->
+						<!-- Remark Text -->
+					<Column demandPopin="true" id="QR_RR_CHARAC_TABLE_COLUMN_test" minScreenWidth="XLarge">
+						<Label text="test"/>
+					</Column>
+				</columns>
+				<items>
+				</items>
+			</Table>			
+		</content>
+		<footer>
+			<Toolbar>
+				<core:InvisibleText text="{
+                        parts: [
+                            {path: 'recordResultsModel>/messageCount'}
+                        ],
+                        formatter: '.formatter.readSaveMessages'
+                    }" id="QR_HIDDEN_MSG"/>
+				<Button id="QR_MSG_POPOVER_BTN" icon="sap-icon://message-popup" type="Emphasized" text="{recordResultsModel>/messageCount}" press="onPressShowSavedMessage" />
+				<ToolbarSpacer />
+				<Button id="QR_SAVE" type="Emphasized" enabled="false" text="{i18n>QM_SAVE}" tooltip="{i18n>QM_SAVE}" press="handleSaveButtonPress"/>
+				<Button id="QR_CANCEL" text="{i18n>QM_CANCEL}" tooltip="{i18n>QM_CANCEL}" press="handleCancelButtonPress"/>
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

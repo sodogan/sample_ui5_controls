@@ -1,0 +1,11 @@
+<!--
+
+    Copyright (C) 2009-2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<SelectDialog cancel="onMasterInspectionCharacteristicClose" class="sapUiPopupWithPadding" confirm="onMasterInspectionCharacteristicClose" items="{path: '/MICSet'}"
+		search="onMasterInspectionCharacteristicSearch" title="{i18n>QM_MIC_HEADER}">
+		<StandardListItem iconDensityAware="false" iconInset="false" info="{InspectionCharacteristic}" title="{InspectionCharacteristicText}"/>
+	</SelectDialog>
+</core:FragmentDefinition>

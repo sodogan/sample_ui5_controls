@@ -1,0 +1,73 @@
+<!--
+
+    Copyright (C) 2009-2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<!--
+	Record Results page charcteristic result table item template
+ -->
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:l="sap.ui.layout" xmlns:mchart="sap.suite.ui.microchart" xmlns:f="sap.ui.layout.form">
+	<ColumnListItem vAlign="Top" type="Default">
+		<cells>
+			<!-- Inspection Object column -->
+			<VBox>
+				<Link
+					text="{
+						parts: [
+							{path: 'Inspectionspecificationtext'},
+							{path: 'Inspectioncharacteristic'}
+						],
+						formatter: '.formatter.textIdConcatenation'}"
+					emphasized="true"
+					enabled="true"
+					wrapping="true"
+					press="handleCharPopoverPress" />
+				<!-- <ObjectStatus title="{TemplateId}" text="{TemplateId}" /> -->
+				<ObjectStatus title="{i18n>QM_LOTS_TEXT}" text="{Inspectionlot}" />
+				<ObjectStatus title="{i18n>QM_OPERATION_TEXT}" text="{Inspectionoperation}" />
+				<ObjectStatus visible="{= !!${Materialsample}}" title="{i18n>QM_PHYSAMPLE_TEXT}" text="{Materialsample}" />
+			</VBox>
+			<!-- Key Attribute column -->
+			<VBox>
+				<Text text="{
+					path: 'Inspspecrecordingtype',
+					formatter: '.formatter.returnInspSpecRecordingType'
+				}" ></Text>
+				<Text visible="{= !!${Inspspeccharccategory}}" text="{
+					path: 'Inspspeccharccategory',
+					formatter: '.formatter.returnInspSpecCharcCategory'
+				}" ></Text>
+				<Text visible="{= !!${Inspspecresultcalculation}}" text="{
+					path: 'Inspspecresultcalculation',
+					formatter: '.formatter.returnInspSpecResultCalculation'
+				}" ></Text>
+				<Text visible="{= !!${Inspspecislongterminspection}}" text="{ path: 'Inspspecislongterminspection', formatter: '.formatter.returnInspSpecIsLongTermInspection' }" />
+			</VBox>
+			<!-- Inspection Result column -->
+			<FlexBox>
+
+			</FlexBox>
+
+			<!-- Status column-->
+			<FlexBox wrap="Wrap">
+			
+			</FlexBox>
+
+			<!-- Remark column-->
+			<FlexBox>
+				<TextArea value="{Inspectionresulttext}"
+					valueState="{= !!${RemarkErrorMessage} ? 'Error' : 'None'}"
+				    valueStateText="{RemarkErrorMessage}" 
+				    change="onRemarkChange"
+				    editable="{= ${IsEditable}}"
+				    placeholder="{RemarkErrorMessage}" 
+				 growing="false" height="100%" width="100%"/>
+			</FlexBox>
+			
+				<!-- Key Attribute column -->
+			<VBox>
+				<Text text="ZQALS_SAFT" ></Text>
+			</VBox>
+		</cells>
+	</ColumnListItem>
+</core:FragmentDefinition>

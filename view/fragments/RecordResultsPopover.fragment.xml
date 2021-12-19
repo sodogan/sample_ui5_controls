@@ -1,0 +1,55 @@
+<!--
+
+    Copyright (C) 2009-2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core" id = "popOverFragmentforCharacteristic">
+	<ResponsivePopover
+		horizontalScrolling="false"
+		title="{parts: [
+							{path: '/Inspectionspecificationtext'},
+							{path: '/Inspectioncharacteristic'}
+						],
+				formatter: '.formatter.textIdConcatenation'
+				}"
+		class="sapUiPopupWithPadding"
+		placement="Right" id = "repsonsivePopOverForCharacteristics">
+		<content>
+			<!-- Inspection Method -->
+			<VBox visible="{= !!${/Inspectionmethodtext} || !!${/Inspectionmethod}}">
+				<Label text="{i18n>QM_INSPMETHOD_TEXT}" />
+				<Text text="{parts: [
+										{path: '/Inspectionmethodtext'},
+										{path: '/Inspectionmethod'}
+									],
+							formatter: '.formatter.textWithBrackets'
+							}" />
+				<Label />
+			</VBox>
+			<!-- Test Equipment -->
+			<VBox visible="{= !!${/Productionresourcetooldesc} || !!${/Productionresourcetool}}">
+				<Label text="{i18n>QM_EQUIPMENT_TEXT}" />
+				<Text text="{parts: [
+										{path: '/Productionresourcetooldesc'},
+										{path: '/Productionresourcetool'}
+									],
+							formatter: '.formatter.textWithBrackets'
+							}" />
+				<Label />
+			</VBox>
+			<!-- Inspection Specification -->
+			<VBox visible="{= !!${/Inspectionspecification}}">
+				<Label text="{i18n>QM_FIELD_MASTER_CHAR}" />
+				<Text text="{/Inspectionspecification}" />
+				<Label />
+			</VBox>
+			<!-- Weighting -->
+			<VBox visible="{= !!${/InspSpecImportanceCodeText}}">
+				<Label text="{i18n>QM_INSP_SPEC_IMPORTANCE_CODE_TEXT}" />
+				<Text text="{/InspSpecImportanceCodeText}" />
+			</VBox>
+		</content>
+	</ResponsivePopover>
+</core:FragmentDefinition>

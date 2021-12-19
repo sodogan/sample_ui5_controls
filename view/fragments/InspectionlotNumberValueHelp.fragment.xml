@@ -1,0 +1,13 @@
+<!--
+
+    Copyright (C) 2009-2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <SelectDialog title="{i18n>addSample.form.valueHelp.title}" class="sapUiPopupWithPadding" items="{path: '/InspectionLotF4Set'}"
+        search="onInspValueHelpSearch" confirm="onInspValueHelpConfirm">
+        <StandardListItem title="{InspectionLot}" />
+    </SelectDialog>
+</core:FragmentDefinition>

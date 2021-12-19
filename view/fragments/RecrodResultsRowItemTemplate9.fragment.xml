@@ -1,0 +1,178 @@
+<!--
+
+    Copyright (C) 2009-2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<!--
+    Record Results page charcteristic result table inspection result column template 9
+    Qualitative, Single, With code
+ -->
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" 
+xmlns:customControl="i2d.qm.inspresults.records1.customcontrol"
+xmlns:l="sap.ui.layout">
+    <l:Grid hSpacing="0" vSpacing="0.5" width="100%">
+        <l:content>
+            <!-- Single Values or Mean Value Grid -->
+            <l:Grid hSpacing="0" vSpacing="0">
+                <l:layoutData>
+                    <l:GridData span="XL6 L6 M6 S12" />
+                </l:layoutData>
+                <l:content>
+                    <Label text="{
+                        parts: [
+                            {path: 'IsSum'},
+                            {path: 'IsQual'},
+                            {path: 'IsWithCode'},
+                            {path: 'IsMeasure'},
+                            {path: 'Unitofmeasuretechnicalname'}
+                        ],
+                        formatter: '.formatter.concatInspectResultsLabel'
+                    }">
+                        <layoutData>
+                            <l:GridData span="XL11 L11 M11 S12" />
+                        </layoutData>
+                    </Label>
+                    <customControl:CodeGroupMultiInput
+                    editable="{= ${IsEditable}}"
+                    width="100%" filterSuggests="false" showValueHelp="true" 
+                    showSuggestion="true" enableMultiLineMode="true" 
+                    valueChange="onValueChange"
+                    valueStateText="{ValuationErrorMessage}" 
+                    valueState="{= !!${ValuationErrorMessage} ? 'Warning' : 'None'}" 
+                    suggestionRows="{ path : 'suggestModel>/results', templateShareable : 'false'}"  
+                    tokens="{path:'to_ResultDetails/results4Binding'}">
+                        <customControl:tokens>
+                            <Token key="{Inspresultiteminternalid}" text="{ parts:[
+                                    {path: 'CharacteristicAttributeCodeGrp'}, 
+                                    {path: 'CharacteristicAttributeCode'}
+                                ],
+                                formatter: '.formatter.rrGroupCodeDisplay' }"></Token>
+                        </customControl:tokens>
+                        <customControl:layoutData>
+                            <l:GridData span="XL11 L11 M11 S12" />
+                        </customControl:layoutData>
+                        <customControl:suggestionColumns>
+                            <Column
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+                                <Text text="{i18n>QM_CODEGROUP_CODE_TITLE}"/>
+                            </Column>
+                            <Column
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+                                <Text text="{i18n>QM_SHORT_TEXT}"/>
+                            </Column>
+                            <Column
+                                minScreenWidth="Tablet"
+                                demandPopin="true">
+                                <Text text="{i18n>QM_CHAR_RESULT_VALUATION}"/>
+                            </Column>
+                        </customControl:suggestionColumns>
+                        <customControl:suggestionRows>
+                            <ColumnListItem>
+                            <cells>
+                                <ObjectIdentifier text="{
+                                        parts:[{path:'suggestModel>CharacteristicAttributeCodeGrp'},{path:'suggestModel>CharacteristicAttributeCode'}],
+                                        formatter: '.formatter.rrGroupCodeDisplay'
+                                    }"/>
+                                <Text text="{suggestModel>CharacteristicAttributeCodeTxt}"/>
+                                <ObjectStatus
+                                    icon="{ path: 'suggestModel>CharcAttributeValuation', formatter: '.formatter.charDetailsResultFlag' }"
+                                    state="{ path: 'suggestModel>CharcAttributeValuation', formatter: '.formatter.charDetailsState' }"/>
+                            </cells>
+                            </ColumnListItem>
+                        </customControl:suggestionRows>
+                    </customControl:CodeGroupMultiInput>
+                </l:content>
+            </l:Grid>
+            <!-- no Mean Value Grid -->
+            <!-- no No. Above / Below -->
+            <!-- Inspected / Nonconforming -->
+            <l:Grid hSpacing="0" vSpacing="0">
+                <l:layoutData>
+                    <l:GridData span="XL6 L6 M6 S12" />
+                </l:layoutData>
+                <l:content>
+                    <Label text="{ path: 'i18n>QM_INSPECTED_NONCONFORMING', formatter: '.formatter.concatColon' }" tooltip="{i18n>QM_INSPECTED_NONCONFORMING}">
+                        <layoutData>
+                            <l:GridData span="XL11 L11 M11 S12" />
+                        </layoutData>
+                    </Label>
+                    <l:Grid hSpacing="0" vSpacing="0">
+                        <l:layoutData>
+                            <l:GridData span="XL11 L11 M11 S5" />
+                        </l:layoutData>
+                        <l:content>
+                            <Input editable="{= ${IsEditable}}" value="{InspResultValidValuesNumber}" change="onChangeForInspected" placeholder="{i18n>QM_RR_CHAR_LIST_INSPECTED}" type="Number" enabled="false" class="sapUiSmallMarginEnd">
+                            <layoutData>
+                                <l:GridData span="XL5 L5 M5 S5" linebreak="true" />
+                            </layoutData>
+                            </Input>
+                            <Input editable="{= ${IsEditable}}" value="{InspRsltNonconformingValsNmbr}" change="onChangeForNonconforming" placeholder="{i18n>QM_CHAR_STATISTICAL_INFORMATION_NONCONFORMING}" type="Number" enabled="false">
+                            <layoutData>
+                                <l:GridData span="XL5 L5 M5 S5" indent="XL1 L1 M1 S1" />
+                            </layoutData>
+                            </Input>
+                        </l:content>
+                    </l:Grid>
+                </l:content>
+            </l:Grid>
+            <!-- Specification and Target -->
+            <l:Grid hSpacing="0" vSpacing="0">
+                <l:layoutData>
+                    <l:GridData span="XL6 L6 M6 S12" />
+                </l:layoutData>
+                <l:content>
+                    <ObjectAttribute visible="{= ${IsLower} || ${IsUpper} || !!${SelectedCodeSetText}}" title="{i18n>QM_CHAR_DETAIL_SPEC}" text="{
+                        parts: [
+                            {path: 'Inspspecisquantitative'},
+                            {path: 'Inspspeclowerlimit'},
+                            {path: 'Inspspecupperlimit'},
+                            {path: 'IsLower'},
+                            {path: 'IsUpper'},
+                            {path: 'Unitofmeasuretechnicalname'},
+                            {path: 'SelectedCodeSetText'},
+                            {path: 'Inspspecdecimalplaces'}
+                        ],
+                        formatter: '.formatter.charDetailsSpec'}">
+                        <layoutData>
+                            <l:GridData span="XL11 L11 M11 S12" />
+                        </layoutData>
+                    </ObjectAttribute>
+                    <ObjectAttribute visible="{HasTarget}" title="{i18n>QM_CHAR_RESULT_TARGET}" text="{
+                        parts: [
+                            {path: 'Inspspectargetvalue'},
+                            {path: 'Inspspecdecimalplaces'},
+                            {path: 'Unitofmeasuretechnicalname'}
+                        ],
+                        formatter: '.formatter.characDetailMeanValue'
+                    }">
+                        <layoutData>
+                            <l:GridData span="XL11 L11 M11 S12" />
+                        </layoutData>
+                    </ObjectAttribute>
+                </l:content>
+            </l:Grid>
+            <!-- Inspect -->
+            <l:Grid hSpacing="0" vSpacing="0">
+                <l:layoutData>
+                    <l:GridData span="XL6 L6 M6 S12" />
+                </l:layoutData>
+                <l:content>
+                    <ObjectAttribute title="{i18n>QM_CHAR_RESULT_INSPECT}" text="{
+                        parts: [
+                            {path: 'Inspcharacteristicsamplesize'},
+                            {path: 'Inspspecsamplequantityfactor'},
+                            {path: 'Inspcharacteristicsampleunit'}
+                        ],
+                        formatter: '.formatter.concatInspect'
+                    }">
+                        <layoutData>
+                            <l:GridData span="XL11 L11 M11 S12" />
+                        </layoutData>
+                    </ObjectAttribute>
+                </l:content>
+            </l:Grid>
+        </l:content>
+    </l:Grid>
+</core:FragmentDefinition>

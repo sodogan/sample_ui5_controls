@@ -1,0 +1,10 @@
+<!--
+
+    Copyright (C) 2009-2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog confirm="onConfirm" search="onSearch" title="{i18n>QM_RR_SELECT_VALUATION_VALUE_HELP_TITLE}" contentHeight="20rem" items="{valueHelpModel>/}">
+		<StandardListItem title="{valueHelpModel>ValuationName}" />
+	</SelectDialog>
+</core:FragmentDefinition>

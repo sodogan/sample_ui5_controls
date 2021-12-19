@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2009-2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<ViewSettingsDialog confirm="confirmPhysicalPointSettings">
+		<sortItems>
+			<ViewSettingsItem key="Operation" selected="true" text="{i18n>QM_OPERATION}"/>
+			<ViewSettingsItem key="Material" selected="true" text="{i18n>QM_MATERIAL}"/>
+			<ViewSettingsItem key="Batch" selected="true" text="{i18n>QM_BATCH}"/>
+			<ViewSettingsItem key="Characteristics" selected="true" text="{i18n>QM_CHARACTERISTICS}"/>
+			<ViewSettingsItem key="Operations" selected="true" text="{i18n>QM_OPERATIONS}"/>
+			<ViewSettingsItem key="Lot End Date" selected="true" text="{i18n>QM_END_DATE}"/>
+		</sortItems>
+		<groupItems>
+		<ViewSettingsItem key="Operation" selected="true" text="{i18n>QM_OPERATION}"/>
+			<ViewSettingsItem key="Material" selected="true" text="{i18n>QM_MATERIAL}"/>
+			<ViewSettingsItem key="Batch" selected="true" text="{i18n>QM_BATCH}"/>
+			<ViewSettingsItem key="Characteristics" selected="true" text="{i18n>QM_CHARACTERISTICS}"/>
+			<ViewSettingsItem key="Operations" selected="true" text="{i18n>QM_OPERATIONS}"/>
+			<ViewSettingsItem key="Lot End Date" selected="true" text="{i18n>QM_END_DATE}"/>
+		</groupItems>
+		<filterItems></filterItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

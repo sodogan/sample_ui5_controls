@@ -1,0 +1,52 @@
+<!--
+
+    Copyright (C) 2009-2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:customControl="i2d.qm.inspresults.records1.customcontrol"
+	xmlns:l="sap.ui.layout">
+	<l:Grid hSpacing="0" vSpacing="0.5" width="100%">
+		<l:content >
+			<l:Grid hSpacing="0" vSpacing="0">
+				<l:layoutData>
+					<l:GridData span="XL12 L12 M12 S12"/>
+				</l:layoutData>
+				<l:content>
+					<!--width="{= ((${InspSampleValuationRule}==='50' || ${InspSampleValuationRule}==='A1') &amp;&amp; ${IsEditable}) ? '60%' : '100%' }"-->
+					<Label wrapping ="true"
+						text="{parts: [ {path: 'Inspectionresultstatustext'}, {path: 'Inspectionvaluationresult'}, {path: 'IsDataChanged'} ], formatter: '.formatter.valuationStatus' }"
+						tooltip="{parts: [ {path: 'Inspectionresultstatustext'}, {path: 'Inspectionvaluationresult'}, {path: 'IsDataChanged'} ], formatter: '.formatter.valuationStatus' }">
+						<layoutData>
+							<l:GridData span="XL12 L12 M12 S12"/>
+						</layoutData>
+					</Label>
+					<l:Grid hSpacing="0" vSpacing="0">
+						<l:layoutData>
+							<l:GridData span="XL11 L11 M11 S5"/>
+						</l:layoutData>
+						<l:content>
+							<FlexBox direction="Row" visible="{= (${InspSampleValuationRule}==='50' || ${InspSampleValuationRule}==='A1') &amp;&amp; ${IsEditable}}">
+								<items>
+									<customControl:ToggleButtonExt icon="sap-icon://accept" press="onAcceptPress" pressed="{= ${Inspectionvaluationresult}==='A' }"
+										tooltip="{i18n>QM_TOOLTIP_ACCEPT}"/>
+									<customControl:ToggleButtonExt icon="sap-icon://decline" press="onDeclinePress" pressed="{= ${Inspectionvaluationresult}==='R' }"
+										tooltip="{i18n>QM_TOOLTIP_REJECT}"/>
+								</items>
+								<layoutData>
+									<l:GridData span="XL5 L5 M5 S5" linebreak="true"/>
+								</layoutData>
+							</FlexBox>
+							<FlexBox direction="Row" visible="{= ${InspSampleValuationRule}!=='50' &amp;&amp; ${InspSampleValuationRule}!=='A1' || !${IsEditable}}">
+								<ObjectStatus class="sapUiSmallMarginBegin" icon="{ path: 'Inspectionvaluationresult', formatter: '.formatter.valuationResultFlag' }"
+									state="{ path: 'Inspectionvaluationresult', formatter: '.formatter.charDetailsState' }"/>
+								<layoutData>
+									<l:GridData span="XL5 L5 M5 S5" linebreak="true"/>
+								</layoutData>
+							</FlexBox>
+						</l:content>
+					</l:Grid>
+				</l:content>
+			</l:Grid>
+		</l:content>
+	</l:Grid>
+</core:FragmentDefinition>

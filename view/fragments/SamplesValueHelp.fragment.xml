@@ -1,0 +1,12 @@
+<!--
+
+    Copyright (C) 2009-2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<SelectDialog cancel="onSamplesValueHelpClose" class="sapUiPopupWithPadding" confirm="onSamplesValueHelpClose"
+		search="onSamplesValueHelpSearch" title="{i18n>s1ilv.table.sample}">
+		<StandardListItem iconDensityAware="false" iconInset="false" id="QR_samplesList" info="{InspectionSubsetInternalID}"
+			title="{MaterialSample}"/>
+	</SelectDialog>
+</core:FragmentDefinition>

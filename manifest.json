@@ -1,0 +1,184 @@
+{
+	"_version": "1.4.0",
+	"sap.app": {
+		"_version": "1.2.0",
+		"id": "i2d.qm.inspresults.records1",
+		"type": "application",
+		"resources": "resources.json",
+		"i18n": "i18n/i18n.properties",
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"applicationVersion": {
+			"version": "6.0.13"
+		},
+		"ach": "QM-FIO-IM",
+		"dataSources": {
+			"mainService": {
+				"uri": "/sap/opu/odata/SAP/QM_RR_SRV/",
+				"type": "OData",
+				"settings": {
+					"annotations": ["mainAnnotations"],
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml"
+				}
+			},
+			"mainAnnotations": {
+				"uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='QM_RR_ANNO_MDL',Version='0001')/$value/",
+				"type": "ODataAnnotation",
+				"settings": {
+					"localUri": "localService/annotations.xml"
+				}
+			}
+		},
+		"sourceTemplate": {
+			"id": "sap.ui.ui5-template-plugin.1worklist",
+			"version": "1.34.1"
+		}
+	},
+	"sap.copilot": {
+		"_version": "1.0.0",
+		"contextAnalysis": {
+			"allowAddingObjectsFromAppScreenToCollection": false
+		}
+	},
+	"sap.fiori": {
+		"_version": "1.1.0",
+		"registrationIds": ["F1685"],
+		"archeType": "transactional"
+	},
+	"sap.ui": {
+		"_version": "1.2.0",
+		"technology": "UI5",
+		"icons": {
+			"icon": "sap-icon://task",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": ["sap_hcb", "sap_bluecrystal"]
+	},
+	"sap.ui5": {
+		"_version": "1.1.0",
+		"rootView": "i2d.qm.inspresults.records1.view.App",
+		"dependencies": {
+			"minUI5Version": "1.56.3",
+			"libs": {
+				"sap.ui.core": {
+					"lazy": false
+				},
+				"sap.m": {
+					"lazy": false
+				},
+				"sap.ui.layout": {
+					"lazy": false
+				},
+				"sap.ui.comp": {
+					"lazy": false
+				},
+				"sap.uxap": {
+					"lazy": true
+				},
+				"sap.suite.ui.microchart": {
+					"lazy": false
+				},
+				"sap.ui.generic.app": {
+					"lazy": false
+				}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "i2d.qm.inspresults.records1.i18n.i18n"
+				}
+			},
+			"": {
+				"preload": true,
+				"dataSource": "mainService",
+				"settings": {
+					"defaultCountMode": "None"
+				}
+			},
+			"@i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"uri": "i18n/i18n.properties"
+			}
+		},
+		"resources": {
+			"css": [{
+				"uri": "css/style.css"
+			}]
+		},
+		"config": {
+			"fullWidth": true,
+			"resourceBundle": "i18n/messageBundle.properties",
+			"serviceConfig": {
+				"name": "",
+				"serviceUrl": "/model/model.json"
+			}
+		},
+		"routing": {
+			"config": {
+				"async": true,
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "i2d.qm.inspresults.records1.view",
+				"controlId": "app",
+				"controlAggregation": "pages",
+				"bypassed": {
+					"target": "notFound"
+				}
+			},
+			"routes": [{
+				"pattern": ":?sapAppState:",
+				"name": "worklist",
+				"target": "worklist"
+			}, {
+				"pattern": "C_QM_InspectionLots/{objectId}",
+				"name": "object",
+				"target": "object"
+			}, {
+				"pattern": "Record?from={fromTab}",
+				"name": "recordResults",
+				"target": "recordResults"
+			}],
+			"targets": {
+				"worklist": {
+					"viewName": "Worklist",
+					"viewId": "worklist",
+					"viewLevel": 1
+				},
+				"recordResults": {
+					"viewName": "RecordResults",
+					"viewLevel": 1,
+					"viewId": "recordResults"
+				},
+				"object": {
+					"viewName": "Object",
+					"viewId": "object",
+					"viewLevel": 3
+				},
+				"objectNotFound": {
+					"viewName": "ObjectNotFound",
+					"viewId": "objectNotFound"
+				},
+				"notFound": {
+					"viewName": "NotFound",
+					"viewId": "notFound"
+				}
+			}
+		}
+	}
+}
